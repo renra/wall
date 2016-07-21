@@ -15,9 +15,11 @@ class Termostat
   def operation(set_temperature)
     @temperature = check_temperature
     @set_temperature = set_temperature
-    if @temperature >= @set_temperature heating
-      else stop_heating
-    end
+    if @temperature >= @set_temperature 
+    	start_heating
+    else 
+    	stop_heating
+  	end
   end
 
   def set_temperature_up(about)
@@ -27,7 +29,5 @@ class Termostat
   def set_temperature_down(about)
     @set_temperature -= about
   end
-	
+
 end
-
-
