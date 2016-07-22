@@ -11,30 +11,23 @@ describe Termostat do
     it { expect(subject).to eql 20 }
   end
 
-  describe '#set_temperature' do
-    subject { termostat.set_temperature }
-
-    # Some default value, can be changed later
-    it { expect(subject).to eql 20 }
-  end
-
-  describe '#operation, #set_temperature' do
+  describe '#operation, set_temperature' do
     subject { termostat.operation }
 
     context 'set temperature is not greater than current temperature' do
       before do
-        @set_temperature = 0
+        termostat.set_temperature = 0
       end
 
-      it { expect(@heat).to eq false }
+      it { expect(subject).to eql false }
     end
 
     context 'set temperature is greater than current temperature' do
       before do
-        @set_temperature = 100
+        termostat.set_temperature = 100
       end
 
-      it { expect(@heat).to eq true }
+      it { expect(subject).to eql true }
     end
   end
 end
