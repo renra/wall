@@ -6,19 +6,11 @@ attr_accessor :set_temperature
 	end
 
 	def check_temperature
-  	check_temperature = @temperature
+  	@temperature
   	# define input of measured temperature
   end
 
-  def start_heating
-    # define output for heating on
-  end
-
-	def stop_heating
-    # define output for heating off
-  end
-
-  def operation
+  def heating?
     if @set_temperature > @temperature 
     	return true
     	start_heating
@@ -26,7 +18,16 @@ attr_accessor :set_temperature
     	return false
     	stop_heating
   	end
-  
+	end
+
+  private
+
+  def start_heating
+    # define output for heating on
+  end
+
+	def stop_heating
+	  # define output for heating off
   end
 
 end

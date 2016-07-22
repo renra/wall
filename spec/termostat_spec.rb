@@ -11,8 +11,8 @@ describe Termostat do
     it { expect(subject).to eql 20 }
   end
 
-  describe '#operation, set_temperature' do
-    subject { termostat.operation }
+  describe '#heating?, set_temperature' do
+    subject { termostat.heating? }
 
     context 'set temperature is not greater than current temperature' do
       before do
