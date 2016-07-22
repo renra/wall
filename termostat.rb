@@ -1,33 +1,31 @@
 class Termostat
+  DEFAULT_TEMPERATURE = 20
 
-  def check_temperature
-    # define input of measured temperature
+  attr_reader :temperature, :set_temperature
+
+  def initialize
+    @set_temperature = @temperature = DEFAULT_TEMPERATURE
+    @heating = false
   end
 
+  def heating?
+    @heating
+  end
+
+  def set_temperature=(desired_temperature)
+    @set_temperature = desired_temperature
+    @set_temperature > @temperature ? start_heating : stop_heating
+    true
+  end
+
+  private
+
   def start_heating
-    # define output for heating on
+    @heating = true
   end
 
   def stop_heating
-    # define output for heating off
-  end
-
-  def operation(set_temperature)
-    @temperature = check_temperature
-    @set_temperature = set_temperature
-    if @temperature >= @set_temperature 
-    	start_heating
-    else 
-    	stop_heating
-  	end
-  end
-
-  def set_temperature_up(about)
-    @set_temperature += about
-  end
-
-  def set_temperature_down(about)
-    @set_temperature -= about
+    @heating = false
   end
 
 end
