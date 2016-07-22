@@ -4,6 +4,31 @@ require_relative '../termostat'
 describe Termostat do
   let(:termostat) { Termostat.new }
 
+  describe '#initialize' do
+    let(:room_temperature) { 20 }
+    let(:set_temperature) { 20 }
+
+    let(:termostat) { Termostat.new(room_temperature, set_temperature) }
+
+    subject { termostat.heating? }
+
+    context 'when both temperatures are the same' do
+      it { expect(subject).to eql false }
+    end
+
+    context 'when room temperature is greater' do
+      let(:room_temperature) { 50 }
+
+      it { expect(subject).to eql false }
+    end
+
+    context 'when room temperature is lower' do
+      let(:room_temperature) { -10 }
+
+      it { expect(subject).to eql true }
+    end
+  end
+
   describe '#temperature' do
     subject { termostat.temperature }
 
@@ -24,7 +49,7 @@ describe Termostat do
     end
 
     context 'default' do
-      it { expect(subject).to eql Termostat::DEFAULT_TEMPERATURE }
+      it { expect(subject).to eql Termostat::DEFAULT_SET_TEMPERATURE }
     end
   end
 
