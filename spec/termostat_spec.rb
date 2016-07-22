@@ -4,14 +4,31 @@ require_relative '../termostat'
 describe Termostat do
   let(:termostat) { Termostat.new }
 
-  describe '#check_temperature' do
-    subject { termostat.check_temperature }
+  describe '#temperature' do
+    subject { termostat.temperature }
 
-    # Some default value, can be changed later
-    it { expect(subject).to eql 20 }
+    it { expect(subject).to eql Termostat::DEFAULT_TEMPERATURE }
   end
 
-  describe '#heating?, set_temperature' do
+  describe '#set_temperature' do
+    subject { termostat.set_temperature }
+
+    context 'temperature set manually' do
+      let(:desired_temperature) { 40 }
+
+      before do
+        termostat.set_temperature = desired_temperature
+      end
+
+      it { expect(subject).to eql desired_temperature }
+    end
+
+    context 'default' do
+      it { expect(subject).to eql Termostat::DEFAULT_TEMPERATURE }
+    end
+  end
+
+  describe '#heating?' do
     subject { termostat.heating? }
 
     context 'set temperature is not greater than current temperature' do
